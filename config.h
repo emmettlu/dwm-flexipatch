@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-
+#include <X11/XF86keysym.h>
 /* Helper macros for spawning commands */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define CMD(...)   { .v = (const char*[]){ __VA_ARGS__, NULL } }
@@ -9,7 +9,7 @@
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
 static const int corner_radius           = 10;
 #else
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 0;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
 #if BAR_BORDER_PATCH
 /* This allows the bar border size to be explicitly set separately from borderpx.
@@ -17,7 +17,7 @@ static const unsigned int borderpx       = 1;   /* border pixel of windows */
  * automatically update with setborderpx. */
 static const unsigned int barborderpx    = 0;  /* border pixel of bar */
 #endif // BAR_BORDER_PATCH
-static const unsigned int snap           = 32;  /* snap pixel */
+static const unsigned int snap           = 0;  /* snap pixel */
 #if SWALLOW_PATCH
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 #endif // SWALLOW_PATCH
@@ -169,51 +169,51 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "monospace:size=10" };
+static const char *fonts[]               = { "Fira Code:size=18", "Source Han Serif SC:size=17" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "monospace:size=10";
+// static const char dmenufont[]            = "Source Han Serif SC:size=18";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-static char normfgcolor[]                = "#bbbbbb";
-static char normbgcolor[]                = "#222222";
-static char normbordercolor[]            = "#444444";
-static char normfloatcolor[]             = "#db8fd9";
+static char normfgcolor[]                = "#efefef";
+static char normbgcolor[]                = "#000000";
+static char normbordercolor[]            = "#000000";
+static char normfloatcolor[]             = "#000000";
 
-static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
-static char selbordercolor[]             = "#005577";
-static char selfloatcolor[]              = "#005577";
+static char selfgcolor[]                 = "#efefef";
+static char selbgcolor[]                 = "#000000";
+static char selbordercolor[]             = "#000000";
+static char selfloatcolor[]              = "#000000";
 
-static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
-static char titlenormbordercolor[]       = "#444444";
-static char titlenormfloatcolor[]        = "#db8fd9";
+static char titlenormfgcolor[]           = "#efefef";
+static char titlenormbgcolor[]           = "#000000";
+static char titlenormbordercolor[]       = "#000000";
+static char titlenormfloatcolor[]        = "#000000";
 
-static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
-static char titleselbordercolor[]        = "#005577";
-static char titleselfloatcolor[]         = "#005577";
+static char titleselfgcolor[]            = "#efefef";
+static char titleselbgcolor[]            = "#000000";
+static char titleselbordercolor[]        = "#000000";
+static char titleselfloatcolor[]         = "#000000";
 
-static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
-static char tagsnormbordercolor[]        = "#444444";
-static char tagsnormfloatcolor[]         = "#db8fd9";
+static char tagsnormfgcolor[]            = "#efefef";
+static char tagsnormbgcolor[]            = "#1f1f1f";
+static char tagsnormbordercolor[]        = "#000000";
+static char tagsnormfloatcolor[]         = "#000000";
 
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
-static char tagsselbordercolor[]         = "#005577";
-static char tagsselfloatcolor[]          = "#005577";
+static char tagsselfgcolor[]             = "#efefef";
+static char tagsselbgcolor[]             = "#000000";
+static char tagsselbordercolor[]         = "#000000";
+static char tagsselfloatcolor[]          = "#000000";
 
-static char hidnormfgcolor[]             = "#005577";
-static char hidselfgcolor[]              = "#227799";
-static char hidnormbgcolor[]             = "#222222";
-static char hidselbgcolor[]              = "#222222";
+static char hidnormfgcolor[]             = "#efefef";
+static char hidselfgcolor[]              = "#000000";
+static char hidnormbgcolor[]             = "#000000";
+static char hidselbgcolor[]              = "#000000";
 
-static char urgfgcolor[]                 = "#bbbbbb";
-static char urgbgcolor[]                 = "#222222";
-static char urgbordercolor[]             = "#ff0000";
-static char urgfloatcolor[]              = "#db8fd9";
+static char urgfgcolor[]                 = "#000000";
+static char urgbgcolor[]                 = "#000000";
+static char urgbordercolor[]             = "#000000";
+static char urgfloatcolor[]              = "#000000";
 
 #if BAR_LTSYMBOL_SCHEME_PATCH
 static char ltsymbolfgcolor[]            = "#222222";
@@ -810,7 +810,7 @@ static const char *xkb_layouts[]  = {
 #endif // XKB_PATCH
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #if COMBO_PATCH && SWAPTAGS_PATCH && TAGOTHERMONITOR_PATCH
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      comboview,      {.ui = 1 << TAG} }, \
@@ -897,11 +897,11 @@ static const char *dmenucmd[] = {
 	#if !NODMENU_PATCH
 	"-m", dmenumon,
 	#endif // NODMENU_PATCH
-	"-fn", dmenufont,
-	"-nb", normbgcolor,
-	"-nf", normfgcolor,
-	"-sb", selbgcolor,
-	"-sf", selfgcolor,
+	// "-fn", dmenufont,
+	// "-nb", normbgcolor,
+	// "-nf", normfgcolor,
+	// "-sb", selbgcolor,
+	// "-sf", selfgcolor,
 	#if BAR_DMENUMATCHTOP_PATCH
 	topbar ? NULL : "-b",
 	#endif // BAR_DMENUMATCHTOP_PATCH
@@ -1044,8 +1044,8 @@ static const Key keys[] = {
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
-	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
+	// { MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
+	// { MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
 	#if RIODRAW_PATCH
 	{ MODKEY|ControlMask,           XK_p,          riospawnsync,           {.v = dmenucmd } },
 	{ MODKEY|ControlMask,           XK_Return,     riospawn,               {.v = termcmd } },
@@ -1118,14 +1118,14 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_r,          aspectresize,           {.i = -24} },
 	#endif // ASPECTRESIZE_PATCH
 	#if MOVERESIZE_PATCH
-	{ MODKEY|Mod4Mask,              XK_Down,       moveresize,             {.v = "0x 25y 0w 0h" } },
-	{ MODKEY|Mod4Mask,              XK_Up,         moveresize,             {.v = "0x -25y 0w 0h" } },
-	{ MODKEY|Mod4Mask,              XK_Right,      moveresize,             {.v = "25x 0y 0w 0h" } },
-	{ MODKEY|Mod4Mask,              XK_Left,       moveresize,             {.v = "-25x 0y 0w 0h" } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_Down,       moveresize,             {.v = "0x 0y 0w 25h" } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_Up,         moveresize,             {.v = "0x 0y 0w -25h" } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_Right,      moveresize,             {.v = "0x 0y 25w 0h" } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_Left,       moveresize,             {.v = "0x 0y -25w 0h" } },
+	{ MODKEY|ShiftMask,              XK_j,          moveresize,             {.v = "0x 25y 0w 0h" } },
+	{ MODKEY|ShiftMask,              XK_k,          moveresize,             {.v = "0x -25y 0w 0h" } },
+	{ MODKEY|ShiftMask,              XK_l,          moveresize,             {.v = "25x 0y 0w 0h" } },
+	{ MODKEY|ShiftMask,              XK_h,          moveresize,             {.v = "-25x 0y 0w 0h" } },
+	{ MODKEY|ShiftMask,              XK_Down,       moveresize,             {.v = "0x 0y 0w 25h" } },
+	{ MODKEY|ShiftMask,              XK_Up,         moveresize,             {.v = "0x 0y 0w -25h" } },
+	{ MODKEY|ShiftMask,              XK_Right,      moveresize,             {.v = "0x 0y 25w 0h" } },
+	{ MODKEY|ShiftMask,              XK_Left,       moveresize,             {.v = "0x 0y -25w 0h" } },
 	#endif // MOVERESIZE_PATCH
 	#if MOVESTACK_PATCH
 	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
@@ -1198,7 +1198,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY|ControlMask,           XK_s,          unhideall,              {0} },
 	#endif // BAR_WINTITLEACTIONS_PATCH
-	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
+	// { MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
 	#if KILLUNSEL_PATCH
 	{ MODKEY|ShiftMask,             XK_x,          killunsel,              {0} },
 	#endif // KILLUNSEL_PATCH
@@ -1452,6 +1452,18 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                                  6)
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
+
+    { MODKEY, XK_k, killclient, {0} },
+    { MODKEY, XK_r, spawn, SHCMD("j4-dmenu-desktop --dmenu='dmenu -i -l 10'") },
+    { MODKEY, XK_p, spawn, SHCMD("$HOME/scripts/mod_p.sh") },
+    { MODKEY, XK_Return, spawn, SHCMD("st") },
+
+    { MODKEY|ShiftMask, XK_s, spawn, SHCMD("maim -s ~/Pictures/screenshots/$(date +\"%Y_%m%d_%H%M%S\").png") },
+
+    { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && kill -35 $(pidof dwmblocks)") },
+    { 0, XF86XK_AudioMute, spawn, SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && kill -35 $(pidof dwmblocks)") },
+    { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && kill -35 $(pidof dwmblocks)") },
+
 };
 
 #if KEYMODES_PATCH

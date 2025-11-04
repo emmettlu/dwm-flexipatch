@@ -257,7 +257,7 @@
  * when including this patch.
  * https://dwm.suckless.org/patches/alpha/
  */
-#define BAR_ALPHA_PATCH 0
+#define BAR_ALPHA_PATCH 1
 
 /* This patch introduces alternative tags which can be switched on the fly for the
  * sole purpose of providing visual aid.
@@ -708,7 +708,7 @@
 /* Allows focusing on clients based on direction (up, down, left, right) instead of client order.
  * https://github.com/bakkeby/patches/wiki/focusdir/
  */
-#define FOCUSDIR_PATCH 0
+#define FOCUSDIR_PATCH 1
 
 /* When changing tags, closing windows or moving clients out of view then focus will revert to the
  * client window that remains under the mouse cursor rather than the most recently focused window.
